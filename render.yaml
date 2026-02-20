@@ -1,0 +1,13 @@
+# Render.com Blueprint - Backend API
+# https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: fraud-watch-api
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Add CORS_ORIGIN in Render Dashboard = your frontend URL (e.g. https://xxx.vercel.app)

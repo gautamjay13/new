@@ -11,9 +11,14 @@ const PORT = process.env.PORT || 3001;
 const CORS_ORIGIN = process.env.CORS_ORIGIN || "http://localhost:8080";
 const NODE_ENV = process.env.NODE_ENV || "development";
 
-// CORS configuration - allow all origins in development
+// CORS: support multiple origins (comma-separated) for production
+const allowedOrigins =
+  NODE_ENV === "production"
+    ? CORS_ORIGIN.split(",").map((o) => o.trim()).filter(Boolean)
+    : true;
+
 app.use(cors({
-  origin: NODE_ENV === "production" ? CORS_ORIGIN : true, // Allow all origins in dev
+  origin: allowedOrigins,
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
