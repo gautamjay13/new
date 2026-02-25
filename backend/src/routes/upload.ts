@@ -1,4 +1,4 @@
-import express from "express";
+import express, { type Request, type Response } from "express";
 import multer from "multer";
 import { parseCSV } from "../utils/csvParser.js";
 import { FraudDetector } from "../services/fraudDetector.js";
@@ -18,7 +18,7 @@ const upload = multer({
 // Store analysis results in memory (in production, use a database)
 const analysisCache = new Map<string, AnalysisResult>();
 
-router.post("/analyze", upload.single("file"), async (req, res) => {
+router.post("/analyze", upload.single("file"), async (req: Request, res: Response) => {
   try {
     console.log("Upload request received");
     console.log("File:", req.file ? { name: req.file.originalname, size: req.file.size } : "No file");

@@ -1,9 +1,9 @@
-import express from "express";
+import express, { type Request, type Response } from "express";
 
 const router = express.Router();
 
 // Get analysis summary
-router.get("/summary", (_req, res) => {
+router.get("/summary", (_req: Request, res: Response) => {
   // In a real app, this would fetch from database
   // For now, return a placeholder
   res.json({
